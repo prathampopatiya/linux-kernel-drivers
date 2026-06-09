@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/lib/modules/7.0.0-22-generic/build/include",
+                "/lib/modules/7.0.0-22-generic/build/arch/x86/include",
+                "/lib/modules/7.0.0-22-generic/build/include/uapi",
+                "/lib/modules/7.0.0-22-generic/build/arch/x86/include/uapi"
+            ],
+            "defines": [
+                "__KERNEL__",
+                "MODULE"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerPath": "/usr/bin/gcc"
+        }
+    ],
+    "version": 4
+}
