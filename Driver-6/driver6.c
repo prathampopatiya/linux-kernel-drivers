@@ -73,7 +73,7 @@ static int __init etx_driver_init(void){
         goto r_class;
     }
     // Creating struct class 
-    if(IS_ERR(class_create("etx_Devicee"))){
+    if(IS_ERR(dev_class = class_create("etx_Devicee"))){
         pr_err("[-] Error Creating class\n");
         goto r_class;
     }
