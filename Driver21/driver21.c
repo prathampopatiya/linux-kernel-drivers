@@ -137,5 +137,5 @@ module_exit(etx_driver_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Pratham Popatiya");
-MODULE_DESCRIPTION("Simple Linux device driver Signals (IOCTL)");
+MODULE_DESCRIPTION("Timers in Linux kernel drivers");
 MODULE_VERSION("1.18");
