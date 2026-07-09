@@ -22,15 +22,12 @@ static ssize_t etx_read(struct file *filp,
 static ssize_t etx_write(struct file *filp, 
                                 const char *buf, size_t len, loff_t * off);
 
-int etx_count = 0; // Variable to be exported to the global kernel table
+                                
+extern int etx_count; 
+void etx_shared_func(void);  // function declaration is extern by default
 
-void etx_shared_func(void){
-    pr_info("[*] Calling shared function\n");
-    etx_count++;
-}
 
-EXPORT_SYMBOL(etx_shared_func);
-EXPORT_SYMBOL(etx_count);
+
 
 //File operation structure
 static struct file_operations fops =
@@ -58,6 +55,8 @@ static int etx_release(struct inode *inode, struct file *file)
 static ssize_t etx_read(struct file *filp, 
                                 char __user *buf, size_t len, loff_t *off)
 {
+        etx_shared_func();
+        pr_info("%d time() shared function called\n",etx_count);
         pr_info("[*] Data Read : Done!\n");
         return 1;
 }
@@ -72,7 +71,7 @@ static ssize_t etx_write(struct file *filp,
 static int __init etx_driver_init(void){
 
     // Allocate the Minor and Major Number
-    if((alloc_chrdev_region(&dev,0,1,"etx_dev")) < 0){
+    if((alloc_chrdev_region(&dev,0,1,"etx_dev2")) < 0){
         pr_err("[-] Error allocating major number\n");
         return -1;
     }
@@ -87,16 +86,16 @@ static int __init etx_driver_init(void){
         goto r_class;
     }
     // Create the class 
-    if(IS_ERR(dev_class = class_create("etx_new_class"))){
+    if(IS_ERR(dev_class = class_create("etx_new_class2"))){
         pr_err("[-] Error creating the class\n");
         goto r_class;
     }
     // Create the device
-    if(IS_ERR(device_create(dev_class,NULL,dev,NULL,"etx_Device"))){
+    if(IS_ERR(device_create(dev_class,NULL,dev,NULL,"etx_Device2"))){
         pr_err("[-] Error creating the device\n");
         goto r_device;
     }
-    pr_info("[+] Device Driver24 created successfully\n");
+    pr_info("[+] Device Driver24_2 created successfully\n");
     return 0;
 r_device:
     class_destroy(dev_class);
@@ -119,5 +118,5 @@ module_exit(etx_driver_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Pratham Popatiya");
-MODULE_DESCRIPTION("Exporting symbols to the global kernel table examples\n");
-MODULE_VERSION("1.20");
+MODULE_DESCRIPTION("Exporting symbols and accessing to the global kernel table examples\n");
+MODULE_VERSION("1.21");

@@ -15,8 +15,8 @@
 uint32_t read_count = 0;
 static struct task_struct *wait_thread;
 
-//DECLARE_COMPLETION(data_read_done);
-struct completion data_read_done;
+//DECLARE_COMPLETION(data_read_done); --> static method 
+struct completion data_read_done; 
 
 dev_t dev = 0;
 static struct class *dev_class;
@@ -128,7 +128,7 @@ static int __init etx_driver_init(void){
     }
 
     // Initialize the completion 
-    init_completion(&data_read_done); 
+    init_completion(&data_read_done);   // --> dynamic method 
     
     pr_info("Device Driver created and inserted successfully\n");
     return 0;
@@ -157,5 +157,5 @@ module_exit(etx_driver_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Pratham Popatiya");
-MODULE_DESCRIPTION("Static method for completion in linux kernel drivers\n");
+MODULE_DESCRIPTION("Static and Dynamic method method for completion in linux kernel drivers\n");
 MODULE_VERSION("1.19");
