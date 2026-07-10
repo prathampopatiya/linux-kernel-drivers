@@ -175,5 +175,5 @@ module_exit(etx_driver_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Pratham Popatiya");
-MODULE_DESCRIPTION("Atomic Variables in kernel drivers\n");
-MODULE_VERSION("1.22");
+MODULE_DESCRIPTION("seqlock in kernel drivers for easy writing to data\n");
+MODULE_VERSION("1.23");
